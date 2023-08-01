@@ -40,8 +40,8 @@ exports.jwtPassport = passport.use(
 
 exports.verifyUser = passport.authenticate('jwt', { session: false });
 
-function verifyAdmin(req, res, next) {
-    if (req.user && req.user.admin === true) {
+exports.verifyAdmin = (req, res, next) => {
+    if (req.user && req.user.admin) {
         return next();
     } else {
         const err = new Error("You are not authorized to perform this operation!");
@@ -81,4 +81,3 @@ exports.facebookPassport = passport.use(
     )
 );
 
-module.exports = verifyAdmin;
